@@ -1,7 +1,6 @@
 //实例化此类，可以传一个error或3个参数
 var result = function (code, msg, data) {
     if (code instanceof Error) {
-        console.error(code);
         msg = code.message;
         code = code.status || result.codes.error;
     }

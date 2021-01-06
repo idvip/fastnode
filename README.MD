@@ -1,3 +1,21 @@
+##【模块配置】
+config/system.json
+```
+    {
+        mongodb_conn:'',
+        profix:''
+    }
+```
+##【模块配置】
+config/module.json
+```
+{
+    name:'用户',
+    code:'user',
+    path:'modules/user',
+    controllers:['userController']
+}
+```
 ##【模块】
 > 项目每个模块为一个文件夹，文件夹下分2个子文件夹：
 *  controller

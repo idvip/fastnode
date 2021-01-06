@@ -10,12 +10,8 @@ module.exports = function(c){
     //退出登录
     c("logout",userService.logout);
 
-    c("/test","get",function (req,res,next) {
-        return userService.addUser("admin","admin","admin",{name:"zs"}).then(function (rs) {
-            res.json(rs);
-        }).catch(function (err) {
-            next(err);
-        })
+    c("/test","get",function () {
+        return userService.addUser("admin","admin","admin",{name:"zs"});
     })
 
     c.bind("user");

@@ -1,14 +1,15 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var session = require('express-session');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const session = require('express-session');
+const result = require('./common/result.js');
 
-var indexRouter = require('./routes/index');
-var nemRouter = require('./routes/nem');
+const indexRouter = require('./routes/index');
+const nemRouter = require('./routes/nem');
 
-var app = express();
+const app = express();
 
 //加载实体类
 
@@ -29,15 +30,15 @@ app.use(session({
 }));
 
 
-app.use(logger('dev'));
+app.use(logger('short'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/',moduleEngine.router);
-app.use('/men', nemRouter);
+app.use(moduleEngine.router);
+app.use('/nem', nemRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -46,13 +47,8 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+   console.error(err);
+   new result(err).out(res);
 });
 
 module.exports = app;
