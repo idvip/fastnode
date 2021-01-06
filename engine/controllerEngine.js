@@ -57,7 +57,6 @@ function getLoader(module) {
 //权限校验中间件
 function authMiddleware(req, res, next) {
     //todo:暂未做校验处理
-    console.log(req.method, res.path);
     next();
 }
 
