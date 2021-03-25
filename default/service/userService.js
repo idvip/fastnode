@@ -1,6 +1,6 @@
-const tools = require('../../../common/tools.js');
-const rst = require('../../../common/result.js');
-const db = require('../../../db/dataModule.js');
+const tools = require('../../common/tools.js');
+const rst = require('../../common/ResultModel.js');
+const db = require('../../db/dataModule.js');
 
 module.exports={
     login: async function (username,password) {

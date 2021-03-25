@@ -1,6 +1,6 @@
 const classHandler = require('./handler/classHandler.js');
 const eventHandler = require('./handler/expressCycleEventHandler.js');
-const result = require('../common/result.js');
+const result = require('../common/ResultModel.js');
 /**
  * 封装express
  * 1:绑定action方法的this对象
@@ -21,6 +21,8 @@ function createProxy(fun) {
       body: req.body,
       params: req.params,
       query: req.query,
+      user:req.session.loginUser,
+      session:req.session
     };
     try {
       // 请求开始处理事件
@@ -33,7 +35,7 @@ function createProxy(fun) {
         )
       );
       if (!(rs instanceof result)) {
-        rs = result.success(rs);
+        rs = result.success('ok',rs);
       }
       // 请求处理完毕，准备向客户端输出时事件，此rs返回的result对象
       await eventHandler.call(that, 'request_end', rs);

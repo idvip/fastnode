@@ -5,7 +5,7 @@
 const config = require('../engine/configEngine.js');
 const mongoose = require('mongoose');
 //连接数据库
-mongoose.connect(config.system.mongodb_conn,{ useNewUrlParser: true,useUnifiedTopology:true });
+mongoose.connect(config.mongodb_conn,{ useNewUrlParser: true,useUnifiedTopology:true });
 
 
 var models = null;

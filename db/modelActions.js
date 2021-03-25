@@ -1,5 +1,5 @@
 const dataModule = require("./dataModule.js");
-const rst = require('../common/result.js');
+const rst = require('../common/ResultModel.js');
 var tools = require('../common/tools.js');
 
 module.exports={

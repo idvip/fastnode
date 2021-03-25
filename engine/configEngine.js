@@ -1,34 +1,32 @@
 //用于加载配置文件
 const fs = require("fs");
-var path = require("path");
-
+const path = require("path");
+let envName = process.env.NODE_ENV;
 let dirName = "./config";
-let moduleJsonPath = path.resolve(dirName+"/module.json");
-let systemJsonPath =  path.resolve(dirName+"/system.json");
-let moduleConfig = null;
-let systemConfig = null;
+let defaultConfigPath = path.resolve(dirName + "/default.js");
+let envConfigPath = envName ? path.resolve(dirName + "/" + envName + '.js') : null;
+let defaultConfig = null;
+let envConfig = null;
 
-console.log("p:"+moduleJsonPath);
-console.log("p:"+systemJsonPath);
-
-//加载模块配置文件
-if(fs.existsSync(moduleJsonPath)){
-    try{
-        moduleConfig = JSON.parse(fs.readFileSync(moduleJsonPath,"utf-8"));
-    }
-    catch (e) {
+console.log(`NODE_ENV:${envName}`)
+//加载默认配置文件
+if (fs.existsSync(defaultConfigPath)) {
+    try {
+        defaultConfig = require(defaultConfigPath);
+        console.log(`默认配置加载完成:${defaultConfigPath}`)
+    } catch (e) {
         console.error(e);
     }
-}//加载系统配置文件
-if(fs.existsSync(systemJsonPath)){
-    try{
-        systemConfig = JSON.parse(fs.readFileSync(systemJsonPath,"utf-8"));
-    }
-    catch (e) {
+}//加载环境配置文件
+if (fs.existsSync(envConfigPath)) {
+    try {
+        envConfig = require(envConfigPath);
+        console.log(`环境配置加载完成:${envConfigPath}`)
+    } catch (e) {
         console.error(e);
     }
 }
-module.exports={
-    module:moduleConfig,
-    system:systemConfig
+module.exports = {
+    ...defaultConfig,
+    ...envConfig
 }

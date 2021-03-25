@@ -1,65 +1,42 @@
 /*
 * 加载所有model，并转换为mongoose的model
 * */
-
-const fs = require('fs');
-const path = require("path");
 const mongoose = require('mongoose');
 const config = require('./configEngine.js');
-
+const fileModuleUtil = require('../utils/fileModuleUtil.js');
 
 
 let models = {};
 let mongooseModels = {};
 
-let parseFiles = function(path,files){
+let parseModel = function(modelObj){
     //数据表前缀
-    let prefix = config.system.prefix || "";
+    let prefix = config.prefix || "";
     prefix = prefix?prefix+"_":"";
-    files.filter(a=>a.length>10 && a.lastIndexOf("Model.json")===a.length-10).forEach(function(file){
-        let modelName = file.split("Model.json")[0];
-        let fileCont = fs.readFileSync(path+"/"+file);
-        try{
-            let obj = JSON.parse(fileCont);
-            models[modelName] = obj;
-            mongooseModels[modelName] = getMongooseModel(obj,prefix+modelName);
-            // console.log(obj);
-        }
-        catch (e) {
-            console.error(e);
-        }
-    })
+    for (let p in modelObj) {
+        models[p] = modelObj[p];
+        mongooseModels[p] = getMongooseModel(modelObj[p], prefix + p);
+    }
 }
 
 //普通model转mongooseModel
 let getMongooseModel = function(model,modelName){
-    for(let p in model){
-        if(typeof  model[p] === 'string'){
-            model[p] = eval(model[p]);
-        }
-        else{
-            //todo:处理对象数据类型
-        }
-    }
     const mmodel =  new mongoose.Schema(model,{
         timestamps:true
     });
     //注册入mongoose并返回
     return mongoose.model(modelName, mmodel);
-
 }
 
 
 
 //加载系统model
-let sysModelPath = path.resolve(__dirname,"../models");
-let sysFiles = fs.readdirSync(sysModelPath);
-parseFiles(sysModelPath,sysFiles);
+let sysModelObj = fileModuleUtil.readModuleByDir("../default/models",'Model')
+parseModel(sysModelObj);
 
 //加载用户model
-let userModelPath = path.resolve('./',"models");
-let userFiles = fs.readdirSync(userModelPath);
-parseFiles(userModelPath,userFiles);
+let userModelObj = fileModuleUtil.readModuleByDir("./models",'Model',2)
+parseModel(userModelObj);
 
 
 module.exports={
