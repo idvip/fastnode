@@ -36,6 +36,9 @@ dataModule.prototype.find=function (condition,filed) {
 dataModule.prototype.save=function (entity) {
     return entity.save();
 }
+dataModule.prototype.updateObject=function (object) {
+    return this.model.update({_id:object._id},object);
+}
 dataModule.prototype.findOne=function (condition) {
     return this.model.findOne(condition)
 }
