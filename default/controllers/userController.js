@@ -1,13 +1,13 @@
 const userService = require('../service/userService.js');
-module.exports = function () {
+module.exports = function (c) {
     //默认规则
-    this.rule({
+    c.rule({
         method: "post",
         path: '/user',
         login: true
     })
     //登录
-    this({
+    c({
         path: "/login",
         login: false
     }, async function (username, password) {
@@ -17,22 +17,21 @@ module.exports = function () {
         return user;
     });
     //获取登录用户信息
-    this.get('/info', function () {
+    c.get('/info', function () {
         return this.user;
     })
     //修改密码
-    this("/changepwd", async function (oldpass, newpass) {
-        let newUser = await userService.changePwd(oldpass, newpass, this.user);
-        this.req.session.loginUser = newUser;
+    c("/changepwd", async function (oldpass, newpass) {
+        this.req.session.loginUser = await userService.changePwd(oldpass, newpass, this.user);
     });
     //退出登录
-    this("/logout", function () {
+    c("/logout", function () {
         this.req.session.loginUser = null;
      });
 
-    this("/test", "get", function () {
+    c("/test", "get", function () {
         return userService.addUser("admin", "admin", "admin", {name: "zs"});
     })
 
-    this.bind("user");
+    c.bind("user");
 }

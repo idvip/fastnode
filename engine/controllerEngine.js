@@ -12,7 +12,7 @@ let userControllerObj = fileModuleUtil.readModuleByDir("./controllers",'Controll
 
 Object.values(sysControllerObj).concat(Object.values(userControllerObj)).forEach(function(fun){
     let c = controller.getLoader();
-    fun.call(c);
+    fun(c);
     //正式加载
     c.register();
 })
