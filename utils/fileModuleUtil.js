@@ -17,7 +17,7 @@ function readModuleByDir(dir, suffix, type) {
         suffix = `${suffix}.js`;
         files.filter(a => a.lastIndexOf(suffix) === (a.length - suffix.length)).forEach(function (file) {
             let key = file.split(suffix)[0];
-            moduleObj[key] = require(`${dir}/${file}`);
+            moduleObj[key] = require(`${modulePath}/${file}`);
         })
     }
     else{
