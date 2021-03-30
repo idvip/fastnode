@@ -5,58 +5,72 @@
 const config = require('../engine/configEngine.js');
 const mongoose = require('mongoose');
 //连接数据库
-mongoose.connect(config.mongodb_conn,{ useNewUrlParser: true,useUnifiedTopology:true });
+mongoose.connect(config.mongodb_conn, {useNewUrlParser: true, useUnifiedTopology: true});
 
+//mongoose实体
+let models = null;
 
-var models = null;
-function dataModule(model) {
-    if(typeof model==='string'){
-        if(!models[model]){
-            throw new Error('model not defined');
+class DataModule {
+    constructor(model) {
+        if (typeof model === 'string') {
+            if (!models[model]) {
+                throw new Error('model not defined');
+            }
+            this.model = models[model];
+        } else {
+            this.model = model;
         }
-        this.model=models[model];
     }
-    else{
-        this.model=model;
+
+    add(data) {
+        return this.model.create(data)
     }
+
+    delete(condition) {
+        return this.model.deleteMany(condition);
+    }
+
+    update(condition, data) {
+        return this.model.update(condition, data);
+    }
+
+    find(condition, filed) {
+        return this.model.find(condition, filed);
+    }
+
+    //保存数据（必须是通过find出来的数据实体）
+    save(entity) {
+        return entity.save();
+    }
+
+    updateObject(object) {
+        return this.model.update({_id: object._id}, object);
+    }
+
+    findOne(condition) {
+        return this.model.findOne(condition)
+    }
+
+    count(condition) {
+        return this.model.count(condition);
+    }
+
+    findById(id) {
+        return this.model.findById(id)
+    }
+
 }
-dataModule.prototype.add=function (data) {
-    return this.model.create(data)
+
+DataModule.instance = (modelName) => {
+    return new DataModule(modelName);
 }
-dataModule.prototype.delete=function (condition) {
-    return this.model.deleteMany(condition);
-}
-dataModule.prototype.update=function (condition,data) {
-    return this.model.update(condition,data);
-}
-dataModule.prototype.find=function (condition,filed) {
-    return this.model.find(condition,filed);
-}
-//保存数据（必须是通过find出来的数据实体）
-dataModule.prototype.save=function (entity) {
-    return entity.save();
-}
-dataModule.prototype.updateObject=function (object) {
-    return this.model.update({_id:object._id},object);
-}
-dataModule.prototype.findOne=function (condition) {
-    return this.model.findOne(condition)
-}
-dataModule.prototype.count=function (condition) {
-    return this.model.count(condition);
-}
-dataModule.prototype.findById=function (id) {
-    return this.model.findById(id)
-}
-dataModule.instance=function(modelName){
-    return new dataModule(modelName);
-}
+
 
 //绑定实体对象
-dataModule.init = function(mongooseModels){
-    if(mongooseModels)
+DataModule.init = (mongooseModels) => {
+    if (mongooseModels)
         models = mongooseModels;
 }
 
 //使用时需要传递models进来
-module.exports=dataModule;
+module.exports = DataModule;
