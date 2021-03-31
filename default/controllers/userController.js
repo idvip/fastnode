@@ -29,7 +29,7 @@ module.exports = function (c) {
         this.req.session.loginUser = null;
      });
 
-    c("/test", "get", function () {
+    c.get({path:"/test",login:false}, function () {
         return userService.addUser("admin", "admin", "admin", {name: "zs"});
     })
 

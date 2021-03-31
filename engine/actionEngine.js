@@ -55,7 +55,7 @@ function getLoader() {
             rule.method='post';
             c(rule,action);
         }
-        if(typeof rule==='string') c(rule,'get',action);
+        if(typeof rule==='string') c(rule,'post',action);
     }
     //设置通用规则（一般用于一个控制器中所有ACTION统一权限）
     c.rule = function (rule) {

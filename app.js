@@ -39,7 +39,7 @@ app.use(function(req, res, next) {
 app.use(function(err, req, res, next) {
    // console.error(err);
    if(!(err instanceof ResultModel)){
-       err = new ResultModel(err).out(res);
+       err = new ResultModel(err);
    }
    console.error(err);
    err.out(res);
