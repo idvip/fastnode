@@ -2,6 +2,7 @@ const modelEngine = require('./engine/modelEngine.js');//加载实体
 const tools = require('./common/tools.js');
 const db = require('./db/dataModule.js');
 const ResultModel = require('./common/ResultModel.js');
+const config = require('./engine/configEngine.js');
 db.init(modelEngine.models);
 module.exports={
     //启动项目
@@ -14,5 +15,6 @@ module.exports={
     tools,
     //数据访问类
     db,
-    ResultModel
+    ResultModel,
+    config
 }

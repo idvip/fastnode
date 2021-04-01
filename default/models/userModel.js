@@ -3,6 +3,6 @@ module.exports = {
     "password": String,
     "role": [String],
     "desc": String,
-    "status": Number,
+    "status": {type:Number,default:0},
     "extend": {}
 }
