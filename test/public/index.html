@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $.post('/user/login', {username: 'admin', password: '111111'}).then(function (rs) {
+            $.get('/user/info');
+        }).then(function (rs) {
+            // $.post('/user/changepwd', {newpass: '111111', oldpass: '111111'})
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>

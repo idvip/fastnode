@@ -16,7 +16,7 @@ function mergeObj(a,b) {
 
 function getPwd(pwd, type) {
     type = type || '';
-    var key = type + '4789*(^&FHJIDY#^ufdsh43287fhaj978789' + type;
+    var key = type + '478fdsa9*(d321^&FHJIDY#^ufdsh43287fhaj9fds7878eeDDFF9' + type;
     return md5(pwd + key);
 }
 
