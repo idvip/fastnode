@@ -5,8 +5,6 @@ const mongoose = require('mongoose');
 const config = require('./configEngine.js');
 const fileModuleUtil = require('../utils/fileModuleUtil.js');
 
-
-let models = {};
 let mongooseModels = {};
 
 let parseModel = function(modelObj){
@@ -14,7 +12,6 @@ let parseModel = function(modelObj){
     let prefix = config.prefix || "";
     prefix = prefix?prefix+"_":"";
     for (let p in modelObj) {
-        models[p] = modelObj[p];
         mongooseModels[p] = getMongooseModel(modelObj[p], prefix + p);
     }
 }
@@ -40,5 +37,5 @@ parseModel(userModelObj);
 
 
 module.exports={
-    models,mongooseModels
+    models:mongooseModels
 }

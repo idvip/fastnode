@@ -25,7 +25,7 @@ function getLoader() {
     };
     let actions = [];
     //用于创建一个新的控制器,rule=规则,action=处理方法
-    //支持重载：url,action 、url,method,action、rule,action
+    //支持重载：path,action 、path,method,action、rule,action
     let c = function (rule, action, act) {
         if (typeof rule == "string") {
             if (typeof action == "string") {
@@ -42,7 +42,7 @@ function getLoader() {
         if (rule.path.indexOf("/") !== 0) rule.path = "/" + rule.path;
         actions.push([rule, action]);
     }
-    //支持重载:url,action、rule,action
+    //支持重载:path,action、rule,action
     c.get = function (rule,action){
         if(typeof rule==='object') {
             rule.method='get';

@@ -1,9 +1,10 @@
 const userService = require('../service/userService.js');
+const config = require('../../engine/configEngine.js');
 module.exports = function (c) {
     //默认规则
     c.rule({
         method: "post",
-        path: '/user',
+        path: config.user_path || '/user',
         login: true
     })
     //登录
@@ -27,9 +28,9 @@ module.exports = function (c) {
     //退出登录
     c("/logout", function () {
         this.req.session.loginUser = null;
-     });
+    });
 
-    c.get({path:"/test",login:false}, function () {
+    c.get({path: "/test", login: false}, function () {
         return userService.addUser("admin", "admin", "admin", {name: "zs"});
     })
 

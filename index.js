@@ -8,10 +8,8 @@ module.exports={
     start:function () {
         require('./bin/www').start();
     },
-    //所有已加载的实体
-    models:modelEngine.models,
     //所有已加载并转换为mongoose实体的实体
-    mongooseModels:modelEngine.mongooseModels,
+    models:modelEngine.models,
     //工具类
     tools,
     //数据访问类
