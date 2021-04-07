@@ -13,10 +13,10 @@ module.exports = {
         });
 
 
-        //查询数据（暂不支持分页），参数：{sort,pageIndex,pageSize,query:{}}
+        //查询数据（暂不支持分页），参数：{fields:{a:1,b:1,c:1}/"a b c",sort,pageIndex,pageSize,query:{}}
         c(modelName + "/list", "post", function () {
             let data = this.body;
-            return db.find(data.query || {});
+            return db.find(data.query || {}, data.fields, data.sort, data.pageIndex, data.pageSize);
         });
 
         //查询数据（暂不支持分页），参数：{sort,pageIndex,pageSize,query:{}}

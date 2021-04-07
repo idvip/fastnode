@@ -110,3 +110,4 @@ url、method（默认get）、login（是否必须登录后可访问，默认fal
  * ResultModel，class
  * tools：object
  * db：class，可直接继承或实例化使用
+ * config：object，配置文件

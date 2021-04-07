@@ -34,8 +34,16 @@ class DataModule {
         return this.model.update(condition, data);
     }
 
-    find(condition, filed) {
-        return this.model.find(condition, filed);
+    //sort=object，如：{time:-1,age:1}
+    find(condition, fields, sort, pageIndex, pageSize) {
+        let query = this.model.find(condition, fields);
+        if (sort) {
+            query.sort(sort);
+        }
+        if (pageIndex !== undefined && pageSize) {
+            query.skip(pageIndex * pageSize).limit(pageSize);
+        }
+        return query;
     }
 
     //保存数据（必须是通过find出来的数据实体）
