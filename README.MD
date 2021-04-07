@@ -1,7 +1,7 @@
-本框架为node+mongodb快速开发框架，集成express、mongoose，使用时无需引用这些框架
-####【启动】
+本框架为node+mongodb快速开发框架，集成express、mongoose，使用时无需引用这些框架  
+####【启动】  
 1 依赖fasenode   
-2 `require('fasenode').start()`
+2 `require('fasenode').start()` 
 > 框架会以当前命令执行目录为项目目录以进行后续的扫描工作  
 
 #### 【目录结构】
