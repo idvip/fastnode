@@ -89,12 +89,12 @@ module.export=function(c){
 * c.post() 支持重载:path,action、rule,action
 * c.bind(modelName) 绑定一个实体的CRUD方法  
 >  提供以下方法可直接调用：
-**modelName + "/find/:id", "get"** //通过ID查询 /modelname/find/:id
-**modelName + "/list", "post"** //查询数据（暂不支持分页），参数：{sort,pageIndex,pageSize,query:{}}  
-**modelName + "/count", "post"** //同list方法
-**modelName + "/delete/:id", "post"**  //删除数据
-**modelName + "/add", "post"** //新增数据
-**modelName + "/update/:id", "post"** //修改数据
+**modelName + "/find/:id", "get"** //通过ID查询 /modelname/find/:id  
+**modelName + "/list", "post"** //查询数据（暂不支持分页），参数：{sort,pageIndex,pageSize,query:{}}    
+**modelName + "/count", "post"** //同list方法  
+**modelName + "/delete/:id", "post"**  //删除数据  
+**modelName + "/add", "post"** //新增数据  
+**modelName + "/update/:id", "post"** //修改数据  
 
 **参数说明：**
 * method：string，请求方法
@@ -102,7 +102,8 @@ module.export=function(c){
 * action：function，处理方法，可通过参数列表直接取到params、body、query里的参数（按优先级排列）
 * rule：object，通过对象配置
 > rule属性：
-url、method（默认get）、login（是否必须登录后可访问，默认false）、path、role（指定角色可访问）
+path、method（默认get）、login（是否必须登录后可访问，默认false）、role（指定角色可访问）   
+> 路由规则 ：c.rule()的rule.path+c()创建action的path
 
 ##【fastnode对外方法/属性】
  * start：方法，用于启动项目
