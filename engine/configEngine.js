@@ -2,7 +2,7 @@
 const fs = require("fs");
 const path = require("path");
 let envName = process.env.NODE_ENV;
-let dirName = "./config";
+let dirName = global.runpath + "/config";
 let defaultConfigPath = path.resolve(dirName + "/default.js");
 let envConfigPath = envName ? path.resolve(dirName + "/" + envName + '.js') : null;
 let defaultConfig = null;

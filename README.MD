@@ -1,8 +1,9 @@
 本框架为node+mongodb快速开发框架，集成express、mongoose，使用时无需引用这些框架  
 ####【启动】  
 1 依赖fasenode   
-2 `require('fasenode').start()` 
+2 `require('fasenode').start(path)` 
 > 框架会以当前命令执行目录为项目目录以进行后续的扫描工作  
+> path：应用程序目录（默认当前目录）
 
 ####【目录结构】
 main.js  *程序入口（建议只写一句启动代码）*  
@@ -11,10 +12,12 @@ main.js  *程序入口（建议只写一句启动代码）*
 |- env.js  *环境配置文件*    
 **models**  *数据库实体*  
 **controllers**  *控制器*  
-modules  *业务处理模块*
+modules  *业务处理模块*  
+public *公共路径，可直接被访问的文件*
 
 >*以上目录粗体为框架扫描目录，名称不可变*  
->*以上目录除config外全部为可选，并可根据实际需求动态添加*
+>*以上目录除config外全部为可选，并可根据实际需求动态添加*  
+>*以上目录可单独放在一个文件夹里，可以和入口文件不同级，运行时传递path即可*
 
 ####【配置】（config目录）
 
@@ -112,3 +115,40 @@ path、method（默认get）、login（是否必须登录后可访问，默认fa
  * tools：object
  * db：class，可直接继承或实例化使用
  * config：object，配置文件
+
+
+#### 建议使用gulp对项目代码进行打包压缩
+
+*依赖：*
+
+```
+npm install --save-dev gulp
+npm install --save-dev gulp-uglify
+npm install --save-dev gulp-clean
+```
+
+*gulpfile.js*
+
+```
+var gulp = require('gulp');
+var uglify = require('gulp-uglify');
+var clean = require('gulp-clean');
+
+gulp.task('clean',function (){
+    return gulp.src(['dist/**'],{read:false}).pipe(clean());
+})
+
+gulp.task('build', function () {
+    return gulp.src(['*server/**/*.js','main.js'])
+        .pipe(uglify({
+            toplevel: true,
+        }))
+        .pipe(gulp.dest('dist/'));
+});
+
+gulp.task('default',gulp.series('clean','build'));
+
+```
+
+*命令：*
+`gulp`

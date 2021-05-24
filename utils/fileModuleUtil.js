@@ -2,12 +2,15 @@
 const path = require('path');
 const fs = require('fs');
 const SYSTEMPATH = __dirname;
-const RUNPATH = './';
+let RUNPATH = null;
 
 
 //扫描一个文件夹下符合指定后缀的module
 //type:1=系统目录（框架目录，默认） 2=运行目录（项目目录）
 function readModuleByDir(dir, suffix, type) {
+    if(!RUNPATH){
+        RUNPATH = global.runpath;
+    }
     type = type || 1;
     let moduleObj = {};
     //加载系统model
