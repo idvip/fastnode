@@ -1,4 +1,4 @@
-本框架为node+mongodb快速开发框架，集成express、mongoose框架，集成登录、注册、权限等用户模块
+本框架为node+mongodb后端快速开发框架，集成express、mongoose框架，集成登录、注册、权限等用户模块
 #### 【启动】  
 1 依赖fastnode   
 2 `require('fasenode').start(path)`   
@@ -82,16 +82,16 @@ module.export=function(c){
 
  > 该文件夹下为控制器文件(根据模块配置列表进行加载)  
 
-##### 【c对象使用方法】
-**通用配置方法：  **
-* c.rule(rule) 当前控制器下有效
+##### 【c对象使用方法】  
+**通用配置方法：**
+* c.rule(rule) 当前控制器下有效  
 
 **创建action方法：**
 * c() 支持重载：path,action 、path,method,action、rule,action
 * c.get() 支持重载:path,action、rule,action  
 * c.post() 支持重载:path,action、rule,action
 * c.bind(modelName) 绑定一个实体的CRUD方法  
->  提供以下方法可直接调用：
+>  CRUD提供以下方法可直接调用：
 **modelName + "/find/:id", "get"** //通过ID查询 /modelname/find/:id  
 **modelName + "/list", "post"** //查询数据（暂不支持分页），参数：{sort,pageIndex,pageSize,query:{}}    
 **modelName + "/count", "post"** //同list方法  
