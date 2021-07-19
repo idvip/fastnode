@@ -27,5 +27,7 @@ function isObjectId(id){
 module.exports={
     mergeObj,
     getPwd,
-    isObjectId
+    isObjectId,
+    //公开mongoose的ObjectID,便于创建实体类型为ObjectId的字段
+    ObjectId:mongoose.Types.ObjectId
 }
