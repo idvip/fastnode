@@ -1,7 +1,6 @@
 /*
-    用于从配置文件加载模块
+    用于加载系统模块和用户模块
  */
-const config = require("./configEngine.js");
 const controller = require("./actionEngine.js");
 const fileModuleUtil = require("../utils/fileModuleUtil");
 

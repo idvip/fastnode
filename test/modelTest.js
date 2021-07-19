@@ -1,7 +1,9 @@
+require('../index').init();
 let {db} = require('../index');
 let ndb = db.instance('note');
 
 async function main() {
+
     let rs = await Promise.all([
         ndb.add({title:"a",content:"a",viewCount: 2}),
         ndb.add({title:"b",content:"b"}),

@@ -1,9 +1,13 @@
 const exportModel = {
-    //启动项目，（path=项目主目录，如不传递则默认为当前工作目录，设置后代表工作目录+项目主目录）
+    //启动项目并开启web服务，（path=项目主目录，如不传递则默认为当前工作目录，设置后代表工作目录+项目主目录）
     start: function (path) {
+        exportModel.init(path);
+        require('./bin/www').start();
+    },
+    //初始化项目不开启web服务
+    init: function (path) {
         global.runpath = './' + (path || '');
         initFramework();
-        require('./bin/www').start();
     }
 }
 

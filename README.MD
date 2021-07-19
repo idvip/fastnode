@@ -1,11 +1,11 @@
-本框架为node+mongodb快速开发框架，集成express、mongoose，使用时无需引用这些框架  
-####【启动】  
-1 依赖fasenode   
-2 `require('fasenode').start(path)` 
-> 框架会以当前命令执行目录为项目目录以进行后续的扫描工作  
-> path：应用程序目录（默认当前目录）
+本框架为node+mongodb快速开发框架，集成express、mongoose框架，集成登录、注册、权限等用户模块
+#### 【启动】  
+1 依赖fastnode   
+2 `require('fasenode').start(path)`   
+> path：应用程序目录（默认当前命令执行目录）  
+> 框架自动扫描应用程序目录，初始化数据库连接、注入express模块，并启动web服务
 
-####【目录结构】
+#### 【目录结构】
 main.js  *程序入口（建议只写一句启动代码）*  
 **config**  *配置文件目录*  
 |- default.js *默认配置文件*  
@@ -19,7 +19,7 @@ public *公共路径，可直接被访问的文件*
 >*以上目录除config外全部为可选，并可根据实际需求动态添加*  
 >*以上目录可单独放在一个文件夹里，可以和入口文件不同级，运行时传递path即可*
 
-####【配置】（config目录）
+#### 【配置】（config目录）
 
 **#文件：**  
 default.js  
@@ -40,7 +40,7 @@ module.export={
 * port：程序端口（默认3000)
 * user_path：用户模块API路径（默认/user）
 
-####【实体】（models目录）
+#### 【实体】（models目录）
 
 **#文件名：**  
 名称+Model.js  
@@ -64,7 +64,7 @@ module.export={
 > 最终会直接转换为 mongoose对象，并默认添加时间戳字段（createdAt、updatedAt）
 
 
-####【控制器/路由】（controllers目录）
+#### 【控制器/路由】（controllers目录）
 **#格式（CMD模块）：**  
 ```
 module.export=function(c){
@@ -82,7 +82,7 @@ module.export=function(c){
 
  > 该文件夹下为控制器文件(根据模块配置列表进行加载)  
 
-#####【c对象使用方法】
+##### 【c对象使用方法】
 **通用配置方法：  **
 * c.rule(rule) 当前控制器下有效
 
@@ -108,8 +108,9 @@ module.export=function(c){
 path、method（默认get）、login（是否必须登录后可访问，默认false）、role（指定角色可访问）   
 > 路由规则 ：c.rule()的rule.path+c()创建action的path
 
-##【fastnode对外方法/属性】
- * start：方法，用于启动项目
+## 【fastnode对外方法/属性】
+ * start：方法，初始化项目并开启web服务
+ * init：方法，仅初始化项目
  * models：object
  * ResultModel，class
  * tools：object

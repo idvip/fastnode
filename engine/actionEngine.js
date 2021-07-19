@@ -1,19 +1,12 @@
 /*
-
-用于初始化控制器
-
+    用于初始化控制器
  */
 
-
 const express = require('express');
-
 const tools = require('../common/tools.js');
-
 const modelActions = require('../db/modelActions.js');
-
 const actionWapper = require('../utils/actionWapper.js');
 const ResultModel = require('../common/ResultModel.js');
-const path = require('path');
 const router = express.Router();
 
 //获取一个新的loader
@@ -43,19 +36,19 @@ function getLoader() {
         actions.push([rule, action]);
     }
     //支持重载:path,action、rule,action
-    c.get = function (rule,action){
-        if(typeof rule==='object') {
-            rule.method='get';
-            c(rule,action);
+    c.get = function (rule, action) {
+        if (typeof rule === 'object') {
+            rule.method = 'get';
+            c(rule, action);
         }
-        if(typeof rule==='string') c(rule,'get',action);
+        if (typeof rule === 'string') c(rule, 'get', action);
     }
-    c.post = function (rule,action){
-        if(typeof rule==='object') {
-            rule.method='post';
-            c(rule,action);
+    c.post = function (rule, action) {
+        if (typeof rule === 'object') {
+            rule.method = 'post';
+            c(rule, action);
         }
-        if(typeof rule==='string') c(rule,'post',action);
+        if (typeof rule === 'string') c(rule, 'post', action);
     }
     //设置通用规则（一般用于一个控制器中所有ACTION统一权限）
     c.rule = function (rule) {

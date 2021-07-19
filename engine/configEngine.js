@@ -1,4 +1,7 @@
-//用于加载配置文件
+/*
+    用于加载配置文件
+ */
+
 const fs = require("fs");
 const path = require("path");
 let envName = process.env.NODE_ENV;
