@@ -7,7 +7,7 @@ const ResultModel = require('./common/ResultModel.js');
 
 
 const app = express();
-app.use(express.static(path.join('./', 'public')));
+app.use(express.static(path.join(global.runpath, 'public')));
 //开始加载模块
 var moduleEngine = require('./engine/controllerEngine.js');
 
