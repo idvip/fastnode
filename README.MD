@@ -1,7 +1,7 @@
 本框架为node+mongodb后端快速开发框架，集成express、mongoose框架，集成登录、注册、权限等用户模块
 #### 【启动】  
 1 依赖fastnode   
-2 `require('fasenode').start(path)`   
+2 `require('fastnode').start(path)`   
 > path：应用程序目录（默认当前命令执行目录）  
 > 框架自动扫描应用程序目录，初始化数据库连接、注入express模块，并启动web服务
 
