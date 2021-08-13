@@ -12,8 +12,9 @@ main.js  *程序入口（建议只写一句启动代码）*
 |- env.js  *环境配置文件*    
 **models**  *数据库实体*  
 **controllers**  *控制器*  
-modules  *业务处理模块*  
-public *公共路径，可直接被访问的文件*
+**filter** *过滤器*   
+**public** *公共路径，可直接被访问的文件*
+modules  *业务处理模块*
 
 >*以上目录粗体为框架扫描目录，名称不可变*  
 >*以上目录除config外全部为可选，并可根据实际需求动态添加*  
@@ -39,6 +40,17 @@ module.export={
 * prefix：数据库表前缀，如果有则表名为：prefix_实体名   
 * port：程序端口（默认3000)
 * user_path：用户模块API路径（默认/user）
+
+##### 【过滤器】
+**#文件名：**  
+beginFilter.js  
+> 请求开始处理事件  
+> 方法签名：function(){}  this=proxy对象  
+
+endFilter.js  
+> 请求结束处理事件，只有code为200类型的结果才会走该事件  
+> 方法签名：function(rs){}  this=proxy对象
+ 
 
 #### 【实体】（models目录）
 

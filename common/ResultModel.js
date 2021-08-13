@@ -11,6 +11,13 @@ class ResultModel extends Error{
         this.message = msg;
         this.data = data;
     }
+    json(){
+        return {
+            code:this.code,
+            message:this.messaage,
+            data:this.data
+        }
+    }
 }
 
 ResultModel.codes = {
@@ -33,6 +40,6 @@ ResultModel.fail = function (msg, data) {
 //向客户端输出结果
 ResultModel.prototype.out = function (res) {
     res.status(this.code || 500);
-    res.json(this);
+    res.json(this.json());
 }
 module.exports = ResultModel;
