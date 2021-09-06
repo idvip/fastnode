@@ -30,7 +30,7 @@ env.js
 
 **#格式（CMD模块）：**  
 ```
-module.export={
+module.exports={
     配置名：配置值
 }
 ```  
@@ -62,13 +62,13 @@ endFilter.js
 
 **#格式（CMD模块）：**  
 ```
-module.export={
+module.exports={
     属性名：类型
 }
 ```  
 如：
 ```
-module.export={
+module.exports={
     name:String,
 	age:Number
 }
@@ -79,7 +79,7 @@ module.export={
 #### 【控制器/路由】（controllers目录）
 **#格式（CMD模块）：**  
 ```
-module.export=function(c){
+module.exports=function(c){
 	c.get('/path',function(param1,param2){
 		
 	})
