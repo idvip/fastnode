@@ -1,7 +1,10 @@
+This is node+mongodb developer framework,includes express、mongoose module.   
 本框架为node+mongodb后端快速开发框架，集成express、mongoose框架，集成登录、注册、权限等用户模块
 #### 【启动】  
-1 依赖fastnode   
-2 `require('fastnode').start(path)`   
+1 依赖 expp   
+`npm install expp --save`   
+2 导入   
+`require('expp').start(path)`   
 > path：应用程序目录（默认当前命令执行目录）  
 > 框架自动扫描应用程序目录，初始化数据库连接、注入express模块，并启动web服务
 
@@ -120,7 +123,7 @@ module.exports=function(c){
 path、method（默认get）、login（是否必须登录后可访问，默认false）、role（指定角色可访问）   
 > 路由规则 ：c.rule()的rule.path+c()创建action的path
 
-## 【fastnode对外方法/属性】
+## 【expp对外方法/属性】
  * start：方法，初始化项目并开启web服务
  * init：方法，仅初始化项目
  * models：object
