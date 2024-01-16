@@ -6,7 +6,7 @@ const express = require('express');
 const tools = require('../common/tools.js');
 const modelActions = require('../db/modelActions.js');
 const actionWapper = require('../utils/actionWapper.js');
-const ResultModel = require('../common/ResultModel.js');
+const authModule = require('../module/authModule.js');
 const router = express.Router();
 
 //获取一个新的loader
@@ -65,20 +65,6 @@ function getLoader() {
     return c;
 }
 
-//权限校验中间件
-function authMiddleware(rule) {
-    return function (req, res, next) {
-        if (rule.login) {
-            let user = req.session.loginUser;
-            if (!user) throw new ResultModel(ResultModel.codes.nologin, '未登录');
-            if (rule.role) {
-                if (rule.role.filter(a => user.role.indexOf(a) > -1).length < 1) throw new ResultModel(ResultModel.codes.noauth, '无权限');
-            }
-        }
-        next();
-    }
-}
-
 //将一个控制器ACTION加入路由
 function addToRouter(rule, action) {
     //请求方式大写转小写
@@ -86,7 +72,7 @@ function addToRouter(rule, action) {
     if (router[rule.method]) {
         let uri = rule.path;
         console.log("uri:", rule.method, uri);
-        router[rule.method](uri, authMiddleware(rule), actionWapper.createProxy(action));
+        router[rule.method](uri, authModule.authMiddleware(rule), actionWapper.createProxy(action));
     } else {
         console.log("dd")
     }

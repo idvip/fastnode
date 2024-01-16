@@ -21,8 +21,8 @@ function createProxy(fun) {
       body: req.body,
       params: req.params,
       query: req.query,
-      user:req.session.loginUser,
-      session:req.session
+      user:req.user,
+      token:req.token
     };
     try {
       // 请求开始处理事件

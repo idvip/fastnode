@@ -1,5 +1,7 @@
 const userService = require('../service/userService.js');
 const config = require('../../engine/configEngine.js');
+const tokenModule = require('../../module/tokenModule.js');
+
 module.exports = function (c) {
     //默认规则
     c.rule({
@@ -12,10 +14,13 @@ module.exports = function (c) {
         path: "/login",
         login: false
     }, async function (username, password) {
+        console.log(33)
         let user = await userService.login(username, password);
-        //todo:目前使用session管理登录，以后可以改成token
-        this.req.session.loginUser = user;
-        return user;
+        let token = await tokenModule.getTokenByUser(user);
+        return {
+            token,
+            user
+        };
     });
     //获取登录用户信息
     c.get('/info', function () {
@@ -27,7 +32,7 @@ module.exports = function (c) {
     });
     //退出登录
     c("/logout", function () {
-        this.req.session.loginUser = null;
+        tokenModule.removeToken(this.token);
     });
 
     c.get({path: "/test", login: false}, function () {

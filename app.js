@@ -2,7 +2,6 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const session = require('express-session');
 const ResultModel = require('./common/ResultModel.js');
 
 
@@ -14,14 +13,6 @@ var moduleEngine = require('./engine/controllerEngine.js');
 var filterEngine = require('./engine/filterEngine.js');
 
 
-//session
-app.use(session({
-    secret: 'fdsarewfda3890423jio#@*(032h432789h',
-    name: 'N-USER-SESSION-ID',   //这里的name值得是cookie的name，默认cookie的name是：connect.sid
-    cookie: {maxAge: 30 * 60 * 1000},  //10分钟过期（单位是毫秒）
-    resave: false,
-    saveUninitialized: true,
-}));
 
 
 app.use(logger('short'));
@@ -51,7 +42,7 @@ app.use(function (err, req, res, next) {
         err = new ResultModel(err);
     }
     console.error(err);
-    err.out(res);
+   err.out(res);
 });
 
 module.exports = app;

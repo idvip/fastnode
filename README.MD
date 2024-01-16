@@ -6,8 +6,8 @@ This is node+mongodb developer framework,includes express、mongoose module.
 2 导入   
 `require('expp').start(path)`   
 > path：应用程序目录（默认当前命令执行目录）  
-> 框架自动扫描应用程序目录，初始化数据库连接、注入express模块，并启动web服务
-
+> 框架自动扫描应用程序目录，初始化数据库连接、注入express模块，并启动web服务  
+> 安装依赖可使用 --registry=https://registry.npm.taobao.org
 #### 【目录结构】
 main.js  *程序入口（建议只写一句启动代码）*  
 **config**  *配置文件目录*  
@@ -39,10 +39,19 @@ module.exports={
 ```  
 
 **#配置项：**  
-* mongodb_conn：数据库连接字符串（必须）  
+* mongodb_conn：数据库连接字符串（必须）
+* redis_config：redis配置对象（必须）
+  ```
+      redis_config : {
+        port:6379,
+        host:'127.0.0.1',
+        //password:''
+    }
+  ```
 * prefix：数据库表前缀，如果有则表名为：prefix_实体名   
 * port：程序端口（默认3000)
 * user_path：用户模块API路径（默认/user）
+* token_expire：token过期时间（默认24小时）
 
 ##### 【过滤器】
 **#文件名：**  

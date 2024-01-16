@@ -14,7 +14,7 @@ class ResultModel extends Error{
     json(){
         return {
             code:this.code,
-            message:this.messaage,
+            message:this.message,
             data:this.data
         }
     }
