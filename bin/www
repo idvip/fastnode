@@ -91,4 +91,5 @@ function onListening() {
 
 exports.start = function () {
     server.listen(port);
+    return server;
 }

@@ -35,7 +35,7 @@ ResultModel.error = function (msg, data) {
     throw new ResultModel(ResultModel.codes.error, msg, data);
 }
 ResultModel.fail = function (msg, data) {
-    throw new ResultModel(ResultModel.codes.fail, msg, data);
+    return new ResultModel(ResultModel.codes.fail, msg, data);
 }
 //向客户端输出结果
 ResultModel.prototype.out = function (res) {

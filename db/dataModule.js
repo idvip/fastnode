@@ -31,7 +31,7 @@ class DataModule {
     }
 
     update(condition, data) {
-        return this.model.update(condition, data);
+        return this.model.updateMany(condition, data);
     }
 
     //sort=object，如：{time:-1,age:1}

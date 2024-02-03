@@ -2,7 +2,7 @@ const exportModel = {
     //启动项目并开启web服务，（path=项目主目录，如不传递则默认为当前工作目录，设置后代表工作目录+项目主目录）
     start: function (path) {
         exportModel.init(path);
-        require('./bin/www').start();
+        return require('./bin/www').start();
     },
     //初始化项目不开启web服务
     init: function (path) {
@@ -17,6 +17,7 @@ function initFramework() {
     const db = require('./db/dataModule.js');
     const ResultModel = require('./common/ResultModel.js');
     const config = require('./engine/configEngine.js');
+    const tokenHelper = require('./module/tokenModule.js');
     db.init(modelEngine.models);
     /*导出对象*/
     //所有已加载并转换为mongoose实体的实体
@@ -27,6 +28,7 @@ function initFramework() {
     exportModel.db = db;
     exportModel.ResultModel = ResultModel;
     exportModel.config = config;
+    exportModel.tokenHelper = tokenHelper;
 }
 
 module.exports = exportModel;
