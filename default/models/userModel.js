@@ -2,6 +2,7 @@ module.exports = {
     "username": String,
     "password": String,
     "nickname":String,
+    "faceUrl":String,
     "phone":String,
     "role": [String],
     "desc": String,
